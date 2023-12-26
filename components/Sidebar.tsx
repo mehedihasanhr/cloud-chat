@@ -1,8 +1,13 @@
 "use client";
 import React from "react";
 import Search from "./Search";
-import ChatSidebar from "./ChatSidebar";
+import dynamic from "next/dynamic";
 import { ScrollArea } from "./ui/scroll-area";
+
+const ChatSidebar = dynamic(() => import("./ChatSidebar"), {
+  ssr: false,
+  loading: () => <p className="px-5 text-sm">Loading...</p>
+});
 
 const Logo = () => {
   return (
