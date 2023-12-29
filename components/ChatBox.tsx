@@ -3,12 +3,12 @@ import ChatInput from "./ChatInput";
 
 const ChatBox = () => {
   return (
-    <div className="h-24">
-      <div className="flex items-center gap-3 h-full px-10">
-        <Button variant="ghost" size="icon">
+    <div className="min-24">
+      <div className="flex items-end pb-5 gap-3 h-full px-10">
+        <Button variant="ghost" size="icon" className="h-10 px-4 ">
           <i className="fi fi-rr-grin text-2xl leading-1 -mb-2" />
         </Button>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className="h-10 px-4">
           <i className="fi fi-rr-images text-2xl leading-1 -mb-2" />
         </Button>
 
