@@ -24,8 +24,8 @@ export default function Sidebar() {
       <Logo />
 
       {/* items */}
-      <div className="flex-1 flex flex-col gap-3 overflow-hidden">
-        <div className="h-14 flex items-center">
+      <div className="flex-1 w-full flex flex-col gap-3 overflow-hidden">
+        <div className="h-14 w-full flex items-center">
           <Search
             value={search}
             onChange={v => setSearch(v)}

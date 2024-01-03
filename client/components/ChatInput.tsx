@@ -1,6 +1,7 @@
-import dynamic from "next/dynamic";
+'use client';
+
+import * as React from "react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
   FontBoldIcon,
@@ -9,12 +10,20 @@ import {
   Link1Icon
 } from "@radix-ui/react-icons";
 
-const ChatInputEditor = dynamic(() => import("./ChatInputEditor"), {
-  ssr: false,
-  loading: () => <>Loading....</>
-});
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
+import "./editor.css";
+
+
 
 const ChatInput = () => {
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty()
+  );
+
+  const [ isFullEditorOpen, setIsFullEditorOpen ] = React.useState(false);
+
+
   return (
     <div className="w-full relative">
       {/* toolbox */}
@@ -53,16 +62,19 @@ const ChatInput = () => {
       </div>
       {/* text box */}
       <div className="border items-end gap-4 max-h-[100px] overflow-y-auto thin-scrollbar rounded-lg">
-        {/* <Input
-          placeholder="Write a message..."
-          className="py-5 pl-5 focus-visible:ring-0 border-0 shadow-none"
-        /> */}
 
         <div className="flex-1 py-2.5 px-3 pr-20 text-sm">
-          <ChatInputEditor />
+            <div className={`chat-send-box ${isFullEditorOpen ? 'extend-mood-on': 'extend-mood-off'}`}>
+              <Editor
+                editorState={editorState}
+                onChange={setEditorState}
+                placeholder="Write message here..."
+              />
+            </div>
         </div>
         <Button
           variant="ghost"
+          onClick={() => setIsFullEditorOpen(!isFullEditorOpen)}
           className="absolute bottom-0 right-0 py-5 text-gray-500 hover:bg-transparent hover:text-black"
         >
           <i className="fi fi-rr-pen-field text-2xl mx-2 my-0 leading-1" />

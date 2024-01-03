@@ -1,7 +1,17 @@
+'use client';
 import { Button } from "@/components/ui/button";
-import ChatInput from "./ChatInput";
+// import ChatInput from "./ChatInput";
+import EditorProvider from "@/context/EditorProvider";
+import dynamic from "next/dynamic";
 
-const ChatBox = () => {
+const ChatInput = dynamic(() => import ('./ChatInput'), {
+  ssr: false,
+  loading: () => <div className="w-full border h-10 rounded-lg" />
+})
+
+
+
+const ChatBoxContainer = () => {
   return (
     <div className="pt-5">
       <div className="min-24">
@@ -25,4 +35,13 @@ const ChatBox = () => {
   );
 };
 
-export default ChatBox;
+
+
+// render chatbox
+export default function ChatBox(){
+  return(
+    <EditorProvider>
+        <ChatBoxContainer />
+    </EditorProvider>
+  )
+};
